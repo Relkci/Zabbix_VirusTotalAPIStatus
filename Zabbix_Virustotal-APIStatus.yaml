@@ -1,0 +1,1180 @@
+zabbix_export:
+  version: '5.4'
+  date: '2021-10-05T04:41:29Z'
+  groups:
+    -
+      uuid: c1042abaca9d435ca00326c24768d8b8
+      name: 'API Providers'
+  templates:
+    -
+      uuid: 24481a06e369488fbd1a80eb8c90918c
+      template: 'Virustotal API Provider'
+      name: 'Virustotal API Provider'
+      groups:
+        -
+          name: 'API Providers'
+      items:
+        -
+          uuid: 788930ea166946f59af4af2c1b63cc55
+          name: virustotal.api.data
+          type: HTTP_AGENT
+          key: virustotal.api.data
+          delay: 2m
+          history: 1h
+          trends: '0'
+          value_type: TEXT
+          url: 'https://www.virustotal.com/api/v3/users/{$VIRUSTOTALAPIKEY}'
+          headers:
+            -
+              name: x-apikey
+              value: '{$VIRUSTOTALAPIKEY}'
+        -
+          uuid: 9ebdeafc42ab407b821fc20f09b0c05c
+          name: 'Virus Total API Quota - API Requests Daily - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_daily.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.api_requests_daily.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 20f02ba3e77144b5aa1724cc700bfd15
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)<>0'
+              name: 'Virusttal Quota Change - api_requests_daily - New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 3ae071458d214c738ea1ae1ec43a38e4
+          name: 'Virus Total API Quota - API Requests Daily - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_daily.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.api_requests_daily.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 47a3308193af441f90a5e9ea8e0ce335
+          name: 'Virus Total API Quota - API Requests Hourly - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_hourly.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.api_requests_hourly.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 5dd3eeaa2d5d4bb4bb628bd1dbb693b0
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)<>0'
+              name: 'Virusttal Quota Change - api_requests_hourly- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 75511830175f48318b06660328d0d463
+          name: 'Virus Total API Quota - Api Requests Hourly - Change'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_hourly.change
+          delay: '0'
+          units: Requests
+          preprocessing:
+            -
+              type: SIMPLE_CHANGE
+              parameters:
+                - ''
+          master_item:
+            key: virustotal.api.quotas.api_requests_hourly.used
+        -
+          uuid: df40e8bbb57a483195f08a931d595026
+          name: 'Virus Total API Quota - Api Requests Hourly - Change RPS'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_hourly.change.rps
+          delay: '0'
+          units: 'Requests Per Second'
+          preprocessing:
+            -
+              type: CHANGE_PER_SECOND
+              parameters:
+                - ''
+          master_item:
+            key: virustotal.api.quotas.api_requests_hourly.used
+        -
+          uuid: 0b8103f5bbe24875a9a80871d6b7b53e
+          name: 'Virus Total API Quota - API Requests Hour - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_hourly.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.api_requests_hourly.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 09d64efea1b14da590b68fa51a46206d
+          name: 'Virus Total API Quota - API Requests Monthly - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_monthly.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.api_requests_monthly.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 8b7b0d69e71f437bb2d51b2372376e14
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)<>0'
+              name: 'Virusttal Quota Change - api_requests_monthly- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 3613fef7190343668e16ab06796626ea
+          name: 'Virus Total API Quota - API Requests Monthly  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.api_requests_monthly.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.api_requests_monthly.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: c4d0a91cbfa04e808e6aef3590e1b2b1
+          name: 'Virus Total API Quota - Cases Created Monthly - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.cases_creation_monthly.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.cases_creation_monthly.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 85e116254191428d8acf30e66fb7eed0
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)<>0'
+              name: 'Virusttal Quota Change - cases_creation_monthly - New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 8286825835b2417ba351414127decfb4
+          name: 'Virus Total API Quota - Cases Created Monthly - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.cases_creation_monthly.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.cases_creation_monthly.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 1dd194c632ee40078f4a2b6bc0112763
+          name: 'Virus Total API Quota - Intelligence Downloads Monthly  - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_downloads_monthly.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_downloads_monthly.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 21ab41b1f7044901bb98a6c147bf0b37
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)<>0'
+              name: 'Virusttal Quota Change - intelligence_downloads_monthly- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 66c45287cb5a4815baaa7a5c6cbcd439
+          name: 'Virus Total API Quota - Intelligence Downloads Monthly  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_downloads_monthly.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_downloads_monthly.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: d3ce2668569c453885158b7b00b02afb
+          name: 'Virus Total API Quota - Intelligence Graphs Private - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_graphs_private.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_graphs_private.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 08634c1c95254dbeb0056858bffb5f86
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)<>0'
+              name: 'Virusttal Quota Change - intelligence_graphs_private- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 91f4df8844634d7994c9b68502a107ed
+          name: 'Virus Total API Quota - Intelligence Graphs Private  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_graphs_private.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_graphs_private.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 857170df14824775a6300a5f32720017
+          name: 'Virus Total API Quota - Intelligence Hunting Rules - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_hunting_rules.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_hunting_rules.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 7e7b058519a44d3d9755948fb71f565e
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)<>0'
+              name: 'Virusttal Quota Change - intelligence_hunting_rules- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 260f40a42cae48748942504749a44c17
+          name: 'Virus Total API Quota - Intelligence Hunting Rules  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_hunting_rules.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_hunting_rules.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 5e73706c960d4fe1a1fdd517eb2a31a0
+          name: 'Virus Total API Quota - Intelligence Retro-Hunt Jobs Monthly  - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_retrohunt_jobs_monthly.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 7bbc32f4063e433a8e473bb248b9f6d4
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)<>0'
+              name: 'Virusttal Quota Change - intelligence_retrohunt_jobs_monthly- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 9b700360acc14db78814a82c80c82c1d
+          name: 'Virus Total API Quota - Intelligence Retro-Hunt Jobs Monthly  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_retrohunt_jobs_monthly.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 780f90d7e3b74190a723b773ed075172
+          name: 'Virus Total API Quota - Intelligence Searches Monthly  - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_searches_monthly.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_searches_monthly.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 1107bce2058343fb97aecd442aa5851a
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)<>0'
+              name: 'Virusttal Quota Change - intelligence_searches_monthly- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 8b49cb9340aa47f8982ea77d639ca693
+          name: 'Virus Total API Quota - Intelligence Searches Monthly  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_searches_monthly.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_searches_monthly.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 477e2fff73404340b6d6a6a7d8e6d4c8
+          name: 'Virus Total API Quota - Intelligence vtdiff Creation - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_vtdiff_creation_monthly.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: cfdeef3532c544928c413db3b62a4ea5
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)<>0'
+              name: 'Virusttal Quota Change - intelligence_vtdiff_creation_monthly- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 6e70efacb6fe4172ba935cd2acf52770
+          name: 'Virus Total API Quota - Intelligence vtdiff Creation - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.intelligence_vtdiff_creation_monthly.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: f435ff122d8442d2a1575fa0e3108ee6
+          name: 'Virus Total API Quota - Monitor Storage Bytes  - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_storage_bytes.allowed
+          delay: '0'
+          units: bytes
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_storage_bytes.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: d19c1584a11d46d48f476f5f59670ac6
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)<>0'
+              name: 'Virusttal Quota Change - monitor_storage_bytes- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 786472f930de4f7eba0b2a15460e44d1
+          name: 'Virus Total API Quota - Monitor Storage Bytes  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_storage_bytes.used
+          delay: '0'
+          units: bytes
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_storage_bytes.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 075619f700064867adf4173920aac493
+          name: 'Virus Total API Quota - Monitor Storage Files  - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_storage_files.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_storage_files.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: ba9b51900adf4eb6b61c0b4a72dda169
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)<>0'
+              name: 'Virusttal Quota Change - monitor_storage_files- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 47e12b89c92d485fb52fec587cfd41a0
+          name: 'Virus Total API Quota - Monitor Storage Files  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_storage_files.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_storage_files.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: a98de1d0f0fb4880b93abdbfa85593d4
+          name: 'Virus Total API Quota - Monitor Upload Bytes  - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_uploaded_bytes.allowed
+          delay: '0'
+          units: bytes
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_uploaded_bytes.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 3846332daeba44158ac2413c6a8d8ffc
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)<>0'
+              name: 'Virusttal Quota Change - monitor_uploaded_bytes- New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: c1ed3ff481004366ba16dbfb73b729d8
+          name: 'Virus Total API Quota - Monitor Upload Bytes  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_uploaded_bytes.used
+          delay: '0'
+          units: bytes
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_uploaded_bytes.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 762812bfbade4c90b0809f4d8e13f153
+          name: 'Virus Total API Quota - Monitor Uploaded Files  - Allowed'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_uploaded_files.allowed
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_uploaded_files.allowed
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: c48de51eeb1943d19b829e4f357d7db6
+              expression: 'change(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)<>0'
+              name: 'Virusttal Quota Change - monitor_uploaded_files - New Quota: {ITEM.LASTVALUE1}'
+              opdata: 'New Quota: {ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: 00eaa93d4c5d44c6a2981c8b9280dab5
+          name: 'Virus Total API Quota - Monitor Uploaded Files  - Used'
+          type: DEPENDENT
+          key: virustotal.api.quotas.monitor_uploaded_files.used
+          delay: '0'
+          units: Credits
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.quotas.monitor_uploaded_files.used
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: a7ea842de50440f1ac3da06fe980a086
+          name: 'Virus Total API User MFA'
+          type: DEPENDENT
+          key: virustotal.api.user.has2fa
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.has_2fa
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 489c30568caf40538f3a20f69b0c4da7
+              expression: 'last(/Virustotal API Provider/virustotal.api.user.has2fa)="false"'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Virustotal API Provider/virustotal.api.user.has2fa)="true"'
+              name: 'Virustotal Account MFA Not Enabled'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+        -
+          uuid: bb29b71bd20947b286f0e3114fc0be1c
+          name: 'Virustotal API User ID'
+          type: DEPENDENT
+          key: virustotal.api.user.id
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.id
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 3215937d43cc42f6bea2665e2d7c4dc7
+          name: 'Virus Total API User Reputation'
+          type: DEPENDENT
+          key: virustotal.api.user.reputation
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.reputation
+          master_item:
+            key: virustotal.api.data
+        -
+          uuid: 4efcd76a7351428d969540ad1d47956b
+          name: 'Virus Total API User Status'
+          type: DEPENDENT
+          key: virustotal.api.user.status
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.attributes.status
+          master_item:
+            key: virustotal.api.data
+          triggers:
+            -
+              uuid: 8c6b9f172ab64ccd96a93d2b81a0c520
+              expression: 'last(/Virustotal API Provider/virustotal.api.user.status)<>"active"'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Virustotal API Provider/virustotal.api.user.status)="active"'
+              name: 'Virustotal Account is not Active'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: INFO
+              manual_close: 'YES'
+            -
+              uuid: cb1f3794981b4a179c884c62132157e1
+              expression: 'change(/Virustotal API Provider/virustotal.api.user.status)<>0'
+              name: 'Virustotal User Account Status Change - {ITEM.LASTVALUE1}'
+              opdata: '{ITEM.LASTVALUE1}'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: b8280045b1194f4c9b15a15af264d37c
+          name: 'Virustotal API User Type'
+          type: DEPENDENT
+          key: virustotal.api.user.type
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.data.type
+          master_item:
+            key: virustotal.api.data
+      macros:
+        -
+          macro: '{$VIRUSTOTALAPIKEY}'
+          value: YOUR_VT_API_KEY
+      dashboards:
+        -
+          uuid: a1092c835cf84f9a808451fb7b7bdff5
+          name: 'VirusTotal API Credits'
+          pages:
+            -
+              widgets:
+                -
+                  type: GRAPH_CLASSIC
+                  name: 'API Credits'
+                  width: '18'
+                  height: '6'
+                  fields:
+                    -
+                      type: GRAPH
+                      name: graphid
+                      value:
+                        name: 'VirusTotal API Credits Used and Quotas'
+                        host: 'Virustotal API Provider'
+                -
+                  type: GRAPH_CLASSIC
+                  name: 'Case Creation Credits'
+                  'y': '6'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    -
+                      type: GRAPH
+                      name: graphid
+                      value:
+                        name: 'VirusTotal Case Creation Usage and Quotas'
+                        host: 'Virustotal API Provider'
+                -
+                  type: GRAPH_CLASSIC
+                  name: 'Intelligent Queries'
+                  'y': '16'
+                  width: '24'
+                  height: '8'
+                  fields:
+                    -
+                      type: GRAPH
+                      name: graphid
+                      value:
+                        name: 'VirusTotal Intelligent Queries - Used and Quotass'
+                        host: 'Virustotal API Provider'
+                -
+                  type: GRAPH_CLASSIC
+                  name: 'Monitor Uploaded Storage Bytes'
+                  x: '12'
+                  'y': '11'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    -
+                      type: GRAPH
+                      name: graphid
+                      value:
+                        name: 'VirusTotal File Upload/Storage Size Usage and Quotas'
+                        host: 'Virustotal API Provider'
+                -
+                  type: GRAPH_CLASSIC
+                  name: 'Monitor Uploaded Storage Count'
+                  'y': '11'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    -
+                      type: GRAPH
+                      name: graphid
+                      value:
+                        name: 'VirusTotal File Upload/Storage Count Useage and Quotas'
+                        host: 'Virustotal API Provider'
+  triggers:
+    -
+      uuid: cffd3d1b18b54d4789bd56eae78be725
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)<last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)*.75'
+      name: 'Virusttal Quota Change - api_requests_daily - Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: b8c02f6b4ff2459099ca8b919208f23a
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)<last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)'
+      name: 'Virusttal Quota Change - api_requests_daily - Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: efe1c60184d947378445207e19bc798c
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)<last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)*.75'
+      name: 'Virusttal Quota Change - api_requests_hourly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 281cb6e63ce646679a3acb74b9cf821d
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)<last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)'
+      name: 'Virusttal Quota Change - api_requests_hourly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: ee186311f1eb471eb92f649781b2446c
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)*.75'
+      name: 'Virusttal Quota Change - api_requests_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 78e74170faf24a618e5c185c5ecfa22a
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)'
+      name: 'Virusttal Quota Change - api_requests_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: f438db9b195e454f8f2686d04df32cb5
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)*.75'
+      name: 'Virusttal Quota Change - cases_creation_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: faa5a249ce9e411d961e8eba4be13ec6
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)'
+      name: 'Virusttal Quota Change - cases_creation_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: debea239b7374b378c61eb12389af5ab
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)*.75'
+      name: 'Virusttal Quota Change - intelligence_downloads_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 6977ccecbec34ff3ae5eb157c76c04ef
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)'
+      name: 'Virusttal Quota Change - intelligence_downloads_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: de8376d95a054e70a30a9d39d5e5c17e
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)*.75'
+      name: 'Virusttal Quota Change - intelligence_graphs_private- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: a25d27abd16b4b2ba913d20d1d710d0d
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)'
+      name: 'Virusttal Quota Change - intelligence_graphs_private- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: 1443054ad35c4c33a245f69b5dd4bc0e
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)*.75'
+      name: 'Virusttal Quota Change - intelligence_hunting_rules- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 56d863f0f8cf431abdefabfcab65c6de
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)'
+      name: 'Virusttal Quota Change - intelligence_hunting_rules- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: 258b3823e57144b39c45fb6a55490ec4
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)*.75'
+      name: 'Virusttal Quota Change - intelligence_retrohunt_jobs_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 1be00ddd222840ac8caae8684ab812ec
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)'
+      name: 'Virusttal Quota Change - intelligence_retrohunt_jobs_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: 0e2231d7a8294f13bf905d4d4861aea7
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)*.75'
+      name: 'Virusttal Quota Change - intelligence_searches_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 1aa5464b157a4e59ab376556f7b00922
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)'
+      name: 'Virusttal Quota Change - intelligence_searches_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: a77f2660d98a4398932045f4293a5408
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)*.75'
+      name: 'Virusttal Quota Change - intelligence_vtdiff_creation_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 0ffee28750c14201b1bc3243eef6d9cf
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)<last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)'
+      name: 'Virusttal Quota Change - intelligence_vtdiff_creation_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: 46c61afe48cd44cb851ea7ea95837eb3
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)*.75'
+      name: 'Virusttal Quota Change - monitor_storage_bytes- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 625ad41633044a948ce0558a19e42b8b
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)'
+      name: 'Virusttal Quota Change - monitor_storage_bytes- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: 990321dbb48646108244d019784cb0e7
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)*.75'
+      name: 'Virusttal Quota Change - monitor_storage_files- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 9b533b742a614812b9872215c5f068a4
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)'
+      name: 'Virusttal Quota Change - monitor_storage_files- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: 6b76833c7923475fadf637c66869adfb
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)*.75'
+      name: 'Virusttal Quota Change - monitor_uploaded_bytes- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 95fdfb7d8f774379909219e3894bed50
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)'
+      name: 'Virusttal Quota Change - monitor_uploaded_bytes- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+    -
+      uuid: 72e5d99e796b4bd6bc1ceca10220cd5a
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)*.75'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)*.75'
+      name: 'Virusttal Quota Change - monitor_uploaded_files- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: WARNING
+      manual_close: 'YES'
+    -
+      uuid: 31e20bfac04440ebb8f7ef119104517b
+      expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)<last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)'
+      name: 'Virusttal Quota Change - monitor_uploaded_files- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      opdata: '{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}'
+      priority: HIGH
+      manual_close: 'YES'
+  graphs:
+    -
+      uuid: a1b499ffc45c45ef86272db17f7ddf8b
+      name: 'VirusTotal API Credits Used and Quotas'
+      graph_items:
+        -
+          sortorder: '1'
+          color: 1A7C11
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.api_requests_daily.allowed
+        -
+          sortorder: '2'
+          color: F63100
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.api_requests_daily.used
+        -
+          sortorder: '3'
+          color: 2774A4
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.api_requests_hourly.used
+        -
+          sortorder: '4'
+          color: A54F10
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.api_requests_hourly.allowed
+        -
+          sortorder: '5'
+          color: FC6EA3
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.api_requests_monthly.allowed
+        -
+          sortorder: '6'
+          color: 6C59DC
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.api_requests_monthly.used
+    -
+      uuid: c592e1e246624eb6a052157719e9fcc8
+      name: 'VirusTotal Case Creation Usage and Quotas'
+      graph_items:
+        -
+          sortorder: '1'
+          color: 1A7C11
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.cases_creation_monthly.allowed
+        -
+          sortorder: '2'
+          color: F63100
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.cases_creation_monthly.used
+    -
+      uuid: f9f94d9b6ae94df68e3b75f0b91ac841
+      name: 'VirusTotal File Upload/Storage Count Useage and Quotas'
+      graph_items:
+        -
+          sortorder: '1'
+          color: 1A7C11
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_storage_files.allowed
+        -
+          sortorder: '2'
+          color: F63100
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_storage_files.used
+        -
+          sortorder: '3'
+          color: 2774A4
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_uploaded_files.allowed
+        -
+          sortorder: '4'
+          color: A54F10
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_uploaded_files.used
+    -
+      uuid: 7cc602ae639c46fa88e666e412e6142a
+      name: 'VirusTotal File Upload/Storage Size Usage and Quotas'
+      graph_items:
+        -
+          sortorder: '1'
+          color: 1A7C11
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_storage_bytes.allowed
+        -
+          sortorder: '2'
+          color: F63100
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_storage_bytes.used
+        -
+          sortorder: '3'
+          color: 2774A4
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_uploaded_bytes.allowed
+        -
+          sortorder: '4'
+          color: A54F10
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.monitor_uploaded_bytes.used
+    -
+      uuid: a9f34c1bcbea41729ad20d8481c0b5bf
+      name: 'VirusTotal Intelligent Queries - Used and Quotass'
+      graph_items:
+        -
+          sortorder: '1'
+          color: 1A7C11
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_downloads_monthly.allowed
+        -
+          sortorder: '2'
+          color: F63100
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_downloads_monthly.used
+        -
+          sortorder: '3'
+          color: 2774A4
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_graphs_private.allowed
+        -
+          sortorder: '4'
+          color: A54F10
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_graphs_private.used
+        -
+          sortorder: '5'
+          color: FC6EA3
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_hunting_rules.allowed
+        -
+          sortorder: '6'
+          color: 6C59DC
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_hunting_rules.used
+        -
+          sortorder: '7'
+          color: AC8C14
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed
+        -
+          sortorder: '8'
+          color: 611F27
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used
+        -
+          sortorder: '9'
+          color: F230E0
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_searches_monthly.allowed
+        -
+          sortorder: '10'
+          color: 5CCD18
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_searches_monthly.used
+        -
+          sortorder: '11'
+          color: BB2A02
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed
+        -
+          sortorder: '12'
+          color: 5A2B57
+          item:
+            host: 'Virustotal API Provider'
+            key: virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used
