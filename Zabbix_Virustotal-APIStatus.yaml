@@ -1,6 +1,6 @@
 zabbix_export:
   version: '5.4'
-  date: '2021-10-05T04:41:29Z'
+  date: '2021-11-17T22:38:45Z'
   groups:
     -
       uuid: c1042abaca9d435ca00326c24768d8b8
@@ -28,6 +28,16 @@ zabbix_export:
             -
               name: x-apikey
               value: '{$VIRUSTOTALAPIKEY}'
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: data
         -
           uuid: 9ebdeafc42ab407b821fc20f09b0c05c
           name: 'Virus Total API Quota - API Requests Daily - Allowed'
@@ -42,6 +52,16 @@ zabbix_export:
                 - $.data.attributes.quotas.api_requests_daily.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
           triggers:
             -
               uuid: 20f02ba3e77144b5aa1724cc700bfd15
@@ -64,6 +84,16 @@ zabbix_export:
                 - $.data.attributes.quotas.api_requests_daily.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 47a3308193af441f90a5e9ea8e0ce335
           name: 'Virus Total API Quota - API Requests Hourly - Allowed'
@@ -78,6 +108,16 @@ zabbix_export:
                 - $.data.attributes.quotas.api_requests_hourly.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
           triggers:
             -
               uuid: 5dd3eeaa2d5d4bb4bb628bd1dbb693b0
@@ -100,6 +140,13 @@ zabbix_export:
                 - ''
           master_item:
             key: virustotal.api.quotas.api_requests_hourly.used
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
         -
           uuid: df40e8bbb57a483195f08a931d595026
           name: 'Virus Total API Quota - Api Requests Hourly - Change RPS'
@@ -114,6 +161,13 @@ zabbix_export:
                 - ''
           master_item:
             key: virustotal.api.quotas.api_requests_hourly.used
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
         -
           uuid: 0b8103f5bbe24875a9a80871d6b7b53e
           name: 'Virus Total API Quota - API Requests Hour - Used'
@@ -128,6 +182,16 @@ zabbix_export:
                 - $.data.attributes.quotas.api_requests_hourly.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 09d64efea1b14da590b68fa51a46206d
           name: 'Virus Total API Quota - API Requests Monthly - Allowed'
@@ -142,6 +206,16 @@ zabbix_export:
                 - $.data.attributes.quotas.api_requests_monthly.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
           triggers:
             -
               uuid: 8b7b0d69e71f437bb2d51b2372376e14
@@ -164,6 +238,16 @@ zabbix_export:
                 - $.data.attributes.quotas.api_requests_monthly.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: c4d0a91cbfa04e808e6aef3590e1b2b1
           name: 'Virus Total API Quota - Cases Created Monthly - Allowed'
@@ -178,6 +262,22 @@ zabbix_export:
                 - $.data.attributes.quotas.cases_creation_monthly.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Account
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: Cases
           triggers:
             -
               uuid: 85e116254191428d8acf30e66fb7eed0
@@ -200,6 +300,22 @@ zabbix_export:
                 - $.data.attributes.quotas.cases_creation_monthly.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Account
+            -
+              tag: VirusTotal
+              value: Cases
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 1dd194c632ee40078f4a2b6bc0112763
           name: 'Virus Total API Quota - Intelligence Downloads Monthly  - Allowed'
@@ -214,6 +330,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_downloads_monthly.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
           triggers:
             -
               uuid: 21ab41b1f7044901bb98a6c147bf0b37
@@ -236,6 +365,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_downloads_monthly.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: d3ce2668569c453885158b7b00b02afb
           name: 'Virus Total API Quota - Intelligence Graphs Private - Allowed'
@@ -250,6 +392,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_graphs_private.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
           triggers:
             -
               uuid: 08634c1c95254dbeb0056858bffb5f86
@@ -272,6 +427,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_graphs_private.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 857170df14824775a6300a5f32720017
           name: 'Virus Total API Quota - Intelligence Hunting Rules - Allowed'
@@ -286,6 +454,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_hunting_rules.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
           triggers:
             -
               uuid: 7e7b058519a44d3d9755948fb71f565e
@@ -308,6 +489,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_hunting_rules.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 5e73706c960d4fe1a1fdd517eb2a31a0
           name: 'Virus Total API Quota - Intelligence Retro-Hunt Jobs Monthly  - Allowed'
@@ -322,6 +516,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_retrohunt_jobs_monthly.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
           triggers:
             -
               uuid: 7bbc32f4063e433a8e473bb248b9f6d4
@@ -344,6 +551,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_retrohunt_jobs_monthly.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 780f90d7e3b74190a723b773ed075172
           name: 'Virus Total API Quota - Intelligence Searches Monthly  - Allowed'
@@ -358,6 +578,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_searches_monthly.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
           triggers:
             -
               uuid: 1107bce2058343fb97aecd442aa5851a
@@ -380,6 +613,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_searches_monthly.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 477e2fff73404340b6d6a6a7d8e6d4c8
           name: 'Virus Total API Quota - Intelligence vtdiff Creation - Allowed'
@@ -394,6 +640,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_vtdiff_creation_monthly.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
           triggers:
             -
               uuid: cfdeef3532c544928c413db3b62a4ea5
@@ -416,6 +675,19 @@ zabbix_export:
                 - $.data.attributes.quotas.intelligence_vtdiff_creation_monthly.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: IntelligentQueues
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: f435ff122d8442d2a1575fa0e3108ee6
           name: 'Virus Total API Quota - Monitor Storage Bytes  - Allowed'
@@ -430,6 +702,16 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_storage_bytes.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
           triggers:
             -
               uuid: d19c1584a11d46d48f476f5f59670ac6
@@ -452,6 +734,16 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_storage_bytes.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 075619f700064867adf4173920aac493
           name: 'Virus Total API Quota - Monitor Storage Files  - Allowed'
@@ -466,6 +758,16 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_storage_files.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
           triggers:
             -
               uuid: ba9b51900adf4eb6b61c0b4a72dda169
@@ -488,6 +790,16 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_storage_files.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: a98de1d0f0fb4880b93abdbfa85593d4
           name: 'Virus Total API Quota - Monitor Upload Bytes  - Allowed'
@@ -502,6 +814,19 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_uploaded_bytes.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: UploadMonitors
           triggers:
             -
               uuid: 3846332daeba44158ac2413c6a8d8ffc
@@ -524,6 +849,19 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_uploaded_bytes.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: UploadMonitors
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: 762812bfbade4c90b0809f4d8e13f153
           name: 'Virus Total API Quota - Monitor Uploaded Files  - Allowed'
@@ -538,6 +876,19 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_uploaded_files.allowed
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Allowed
+            -
+              tag: VirusTotal
+              value: UploadMonitors
           triggers:
             -
               uuid: c48de51eeb1943d19b829e4f357d7db6
@@ -560,6 +911,19 @@ zabbix_export:
                 - $.data.attributes.quotas.monitor_uploaded_files.used
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: UploadMonitors
+            -
+              tag: VirusTotal
+              value: Used
         -
           uuid: a7ea842de50440f1ac3da06fe980a086
           name: 'Virus Total API User MFA'
@@ -575,6 +939,16 @@ zabbix_export:
                 - $.data.attributes.has_2fa
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Account
           triggers:
             -
               uuid: 489c30568caf40538f3a20f69b0c4da7
@@ -600,6 +974,16 @@ zabbix_export:
                 - $.data.id
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Account
         -
           uuid: 3215937d43cc42f6bea2665e2d7c4dc7
           name: 'Virus Total API User Reputation'
@@ -613,6 +997,16 @@ zabbix_export:
                 - $.data.attributes.reputation
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Account
         -
           uuid: 4efcd76a7351428d969540ad1d47956b
           name: 'Virus Total API User Status'
@@ -628,6 +1022,16 @@ zabbix_export:
                 - $.data.attributes.status
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Account
           triggers:
             -
               uuid: 8c6b9f172ab64ccd96a93d2b81a0c520
@@ -660,6 +1064,26 @@ zabbix_export:
                 - $.data.type
           master_item:
             key: virustotal.api.data
+          tags:
+            -
+              tag: Application
+              value: API
+            -
+              tag: Application
+              value: VirusTotal
+            -
+              tag: VirusTotal
+              value: Account
+      tags:
+        -
+          tag: API
+          value: Virustotal
+        -
+          tag: Application
+          value: API
+        -
+          tag: Application
+          value: Virustotal
       macros:
         -
           macro: '{$VIRUSTOTALAPIKEY}'

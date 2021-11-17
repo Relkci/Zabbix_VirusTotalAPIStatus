@@ -41,11 +41,42 @@ Add agent interface (its necessary for the HTTP Agent to work, despite an actual
 - Account not active
 - Account without MFA
 
+## Tags
+- Application:API
+- VirusTotal:data (JSON)
+- VirusTotal:Used (Credits Used)
+- VirusTotal:Allowed (Credits Allowed)
+- VirusTotal:Account (Account information)
+- VirusTotal:IntelligentQueues (Intelligence Hunting Usage)
+- VirusTotal:Cases (Case Submission Usage)
+- VirusTotal:UploadMonitor (Upload Monitor Statistics)
+
+
 
 ## Triggers
 Credits has reached zero
 Change in account status
 Account status is inactive
+
+## Screenshots
+
+Template Macros
+![](images/screenshot1.png)
+
+Dashboard - API Credits - 30 days
+![](images/screenshot2.png)
+
+Dashboard - Case Creation Credits - 30 days
+![](images/screenshot3.png)
+
+Dashboard - Monitor Upload Stats - 30 days
+![](images/screenshot4.png)
+
+Dashboard - Intelligent Queues Credits - 30 days
+![](images/screenshot5.png)
+
+## Updates
+- 11/17/2021 - Added screenshots; added tags; aded xml
 
 ## Contact
 Twitter: @KRelkci

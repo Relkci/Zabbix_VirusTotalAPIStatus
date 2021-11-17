@@ -1,0 +1,2113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zabbix_export>
+	<version>5.4</version>
+	<date>2021-11-17T22:39:16Z</date>
+	<groups>
+		<group>
+			<uuid>c1042abaca9d435ca00326c24768d8b8</uuid>
+			<name>API Providers</name>
+		</group>
+	</groups>
+	<templates>
+		<template>
+			<uuid>24481a06e369488fbd1a80eb8c90918c</uuid>
+			<template>Virustotal API Provider</template>
+			<name>Virustotal API Provider</name>
+			<groups>
+				<group>
+					<name>API Providers</name>
+				</group>
+			</groups>
+			<items>
+				<item>
+					<uuid>788930ea166946f59af4af2c1b63cc55</uuid>
+					<name>virustotal.api.data</name>
+					<type>HTTP_AGENT</type>
+					<key>virustotal.api.data</key>
+					<delay>2m</delay>
+					<history>1h</history>
+					<trends>0</trends>
+					<value_type>TEXT</value_type>
+					<url>https://www.virustotal.com/api/v3/users/{$VIRUSTOTALAPIKEY}</url>
+					<headers>
+						<header>
+							<name>x-apikey</name>
+							<value>{$VIRUSTOTALAPIKEY}</value>
+						</header>
+					</headers>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>data</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>9ebdeafc42ab407b821fc20f09b0c05c</uuid>
+					<name>Virus Total API Quota - API Requests Daily - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_daily.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.api_requests_daily.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>20f02ba3e77144b5aa1724cc700bfd15</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - api_requests_daily - New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>3ae071458d214c738ea1ae1ec43a38e4</uuid>
+					<name>Virus Total API Quota - API Requests Daily - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_daily.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.api_requests_daily.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>47a3308193af441f90a5e9ea8e0ce335</uuid>
+					<name>Virus Total API Quota - API Requests Hourly - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_hourly.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.api_requests_hourly.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>5dd3eeaa2d5d4bb4bb628bd1dbb693b0</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - api_requests_hourly- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>75511830175f48318b06660328d0d463</uuid>
+					<name>Virus Total API Quota - Api Requests Hourly - Change</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_hourly.change</key>
+					<delay>0</delay>
+					<units>Requests</units>
+					<preprocessing>
+						<step>
+							<type>SIMPLE_CHANGE</type>
+							<parameters>
+								<parameter/>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.quotas.api_requests_hourly.used</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>df40e8bbb57a483195f08a931d595026</uuid>
+					<name>Virus Total API Quota - Api Requests Hourly - Change RPS</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_hourly.change.rps</key>
+					<delay>0</delay>
+					<units>Requests Per Second</units>
+					<preprocessing>
+						<step>
+							<type>CHANGE_PER_SECOND</type>
+							<parameters>
+								<parameter/>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.quotas.api_requests_hourly.used</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>0b8103f5bbe24875a9a80871d6b7b53e</uuid>
+					<name>Virus Total API Quota - API Requests Hour - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_hourly.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.api_requests_hourly.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>09d64efea1b14da590b68fa51a46206d</uuid>
+					<name>Virus Total API Quota - API Requests Monthly - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_monthly.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.api_requests_monthly.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>8b7b0d69e71f437bb2d51b2372376e14</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - api_requests_monthly- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>3613fef7190343668e16ab06796626ea</uuid>
+					<name>Virus Total API Quota - API Requests Monthly  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.api_requests_monthly.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.api_requests_monthly.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>c4d0a91cbfa04e808e6aef3590e1b2b1</uuid>
+					<name>Virus Total API Quota - Cases Created Monthly - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.cases_creation_monthly.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.cases_creation_monthly.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Account</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Cases</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>85e116254191428d8acf30e66fb7eed0</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - cases_creation_monthly - New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>8286825835b2417ba351414127decfb4</uuid>
+					<name>Virus Total API Quota - Cases Created Monthly - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.cases_creation_monthly.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.cases_creation_monthly.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Account</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Cases</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>1dd194c632ee40078f4a2b6bc0112763</uuid>
+					<name>Virus Total API Quota - Intelligence Downloads Monthly  - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_downloads_monthly.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_downloads_monthly.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>21ab41b1f7044901bb98a6c147bf0b37</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - intelligence_downloads_monthly- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>66c45287cb5a4815baaa7a5c6cbcd439</uuid>
+					<name>Virus Total API Quota - Intelligence Downloads Monthly  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_downloads_monthly.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_downloads_monthly.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>d3ce2668569c453885158b7b00b02afb</uuid>
+					<name>Virus Total API Quota - Intelligence Graphs Private - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_graphs_private.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_graphs_private.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>08634c1c95254dbeb0056858bffb5f86</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - intelligence_graphs_private- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>91f4df8844634d7994c9b68502a107ed</uuid>
+					<name>Virus Total API Quota - Intelligence Graphs Private  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_graphs_private.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_graphs_private.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>857170df14824775a6300a5f32720017</uuid>
+					<name>Virus Total API Quota - Intelligence Hunting Rules - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_hunting_rules.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_hunting_rules.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>7e7b058519a44d3d9755948fb71f565e</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - intelligence_hunting_rules- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>260f40a42cae48748942504749a44c17</uuid>
+					<name>Virus Total API Quota - Intelligence Hunting Rules  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_hunting_rules.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_hunting_rules.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>5e73706c960d4fe1a1fdd517eb2a31a0</uuid>
+					<name>Virus Total API Quota - Intelligence Retro-Hunt Jobs Monthly  - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_retrohunt_jobs_monthly.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>7bbc32f4063e433a8e473bb248b9f6d4</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - intelligence_retrohunt_jobs_monthly- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>9b700360acc14db78814a82c80c82c1d</uuid>
+					<name>Virus Total API Quota - Intelligence Retro-Hunt Jobs Monthly  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_retrohunt_jobs_monthly.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>780f90d7e3b74190a723b773ed075172</uuid>
+					<name>Virus Total API Quota - Intelligence Searches Monthly  - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_searches_monthly.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_searches_monthly.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>1107bce2058343fb97aecd442aa5851a</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - intelligence_searches_monthly- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>8b49cb9340aa47f8982ea77d639ca693</uuid>
+					<name>Virus Total API Quota - Intelligence Searches Monthly  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_searches_monthly.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_searches_monthly.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>477e2fff73404340b6d6a6a7d8e6d4c8</uuid>
+					<name>Virus Total API Quota - Intelligence vtdiff Creation - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_vtdiff_creation_monthly.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>cfdeef3532c544928c413db3b62a4ea5</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - intelligence_vtdiff_creation_monthly- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>6e70efacb6fe4172ba935cd2acf52770</uuid>
+					<name>Virus Total API Quota - Intelligence vtdiff Creation - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.intelligence_vtdiff_creation_monthly.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>IntelligentQueues</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>f435ff122d8442d2a1575fa0e3108ee6</uuid>
+					<name>Virus Total API Quota - Monitor Storage Bytes  - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_storage_bytes.allowed</key>
+					<delay>0</delay>
+					<units>bytes</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_storage_bytes.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>d19c1584a11d46d48f476f5f59670ac6</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - monitor_storage_bytes- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>786472f930de4f7eba0b2a15460e44d1</uuid>
+					<name>Virus Total API Quota - Monitor Storage Bytes  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_storage_bytes.used</key>
+					<delay>0</delay>
+					<units>bytes</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_storage_bytes.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>075619f700064867adf4173920aac493</uuid>
+					<name>Virus Total API Quota - Monitor Storage Files  - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_storage_files.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_storage_files.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>ba9b51900adf4eb6b61c0b4a72dda169</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - monitor_storage_files- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>47e12b89c92d485fb52fec587cfd41a0</uuid>
+					<name>Virus Total API Quota - Monitor Storage Files  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_storage_files.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_storage_files.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>a98de1d0f0fb4880b93abdbfa85593d4</uuid>
+					<name>Virus Total API Quota - Monitor Upload Bytes  - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_uploaded_bytes.allowed</key>
+					<delay>0</delay>
+					<units>bytes</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_uploaded_bytes.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>UploadMonitors</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>3846332daeba44158ac2413c6a8d8ffc</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - monitor_uploaded_bytes- New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>c1ed3ff481004366ba16dbfb73b729d8</uuid>
+					<name>Virus Total API Quota - Monitor Upload Bytes  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_uploaded_bytes.used</key>
+					<delay>0</delay>
+					<units>bytes</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_uploaded_bytes.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>UploadMonitors</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>762812bfbade4c90b0809f4d8e13f153</uuid>
+					<name>Virus Total API Quota - Monitor Uploaded Files  - Allowed</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_uploaded_files.allowed</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_uploaded_files.allowed</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Allowed</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>UploadMonitors</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>c48de51eeb1943d19b829e4f357d7db6</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)&lt;&gt;0</expression>
+							<name>Virusttal Quota Change - monitor_uploaded_files - New Quota: {ITEM.LASTVALUE1}</name>
+							<opdata>New Quota: {ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>00eaa93d4c5d44c6a2981c8b9280dab5</uuid>
+					<name>Virus Total API Quota - Monitor Uploaded Files  - Used</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.quotas.monitor_uploaded_files.used</key>
+					<delay>0</delay>
+					<units>Credits</units>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.quotas.monitor_uploaded_files.used</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>UploadMonitors</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Used</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>a7ea842de50440f1ac3da06fe980a086</uuid>
+					<name>Virus Total API User MFA</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.user.has2fa</key>
+					<delay>0</delay>
+					<trends>0</trends>
+					<value_type>TEXT</value_type>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.has_2fa</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Account</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>489c30568caf40538f3a20f69b0c4da7</uuid>
+							<expression>last(/Virustotal API Provider/virustotal.api.user.has2fa)=&quot;false&quot;</expression>
+							<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+							<recovery_expression>last(/Virustotal API Provider/virustotal.api.user.has2fa)=&quot;true&quot;</recovery_expression>
+							<name>Virustotal Account MFA Not Enabled</name>
+							<opdata>{ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>bb29b71bd20947b286f0e3114fc0be1c</uuid>
+					<name>Virustotal API User ID</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.user.id</key>
+					<delay>0</delay>
+					<trends>0</trends>
+					<value_type>TEXT</value_type>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.id</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Account</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>3215937d43cc42f6bea2665e2d7c4dc7</uuid>
+					<name>Virus Total API User Reputation</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.user.reputation</key>
+					<delay>0</delay>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.reputation</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Account</value>
+						</tag>
+					</tags>
+				</item>
+				<item>
+					<uuid>4efcd76a7351428d969540ad1d47956b</uuid>
+					<name>Virus Total API User Status</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.user.status</key>
+					<delay>0</delay>
+					<trends>0</trends>
+					<value_type>TEXT</value_type>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.attributes.status</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Account</value>
+						</tag>
+					</tags>
+					<triggers>
+						<trigger>
+							<uuid>8c6b9f172ab64ccd96a93d2b81a0c520</uuid>
+							<expression>last(/Virustotal API Provider/virustotal.api.user.status)&lt;&gt;&quot;active&quot;</expression>
+							<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+							<recovery_expression>last(/Virustotal API Provider/virustotal.api.user.status)=&quot;active&quot;</recovery_expression>
+							<name>Virustotal Account is not Active</name>
+							<opdata>{ITEM.LASTVALUE1}</opdata>
+							<priority>INFO</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+						<trigger>
+							<uuid>cb1f3794981b4a179c884c62132157e1</uuid>
+							<expression>change(/Virustotal API Provider/virustotal.api.user.status)&lt;&gt;0</expression>
+							<name>Virustotal User Account Status Change - {ITEM.LASTVALUE1}</name>
+							<opdata>{ITEM.LASTVALUE1}</opdata>
+							<priority>WARNING</priority>
+							<manual_close>YES</manual_close>
+						</trigger>
+					</triggers>
+				</item>
+				<item>
+					<uuid>b8280045b1194f4c9b15a15af264d37c</uuid>
+					<name>Virustotal API User Type</name>
+					<type>DEPENDENT</type>
+					<key>virustotal.api.user.type</key>
+					<delay>0</delay>
+					<trends>0</trends>
+					<value_type>TEXT</value_type>
+					<preprocessing>
+						<step>
+							<type>JSONPATH</type>
+							<parameters>
+								<parameter>$.data.type</parameter>
+							</parameters>
+						</step>
+					</preprocessing>
+					<master_item>
+						<key>virustotal.api.data</key>
+					</master_item>
+					<tags>
+						<tag>
+							<tag>Application</tag>
+							<value>API</value>
+						</tag>
+						<tag>
+							<tag>Application</tag>
+							<value>VirusTotal</value>
+						</tag>
+						<tag>
+							<tag>VirusTotal</tag>
+							<value>Account</value>
+						</tag>
+					</tags>
+				</item>
+			</items>
+			<tags>
+				<tag>
+					<tag>API</tag>
+					<value>Virustotal</value>
+				</tag>
+				<tag>
+					<tag>Application</tag>
+					<value>API</value>
+				</tag>
+				<tag>
+					<tag>Application</tag>
+					<value>Virustotal</value>
+				</tag>
+			</tags>
+			<macros>
+				<macro>
+					<macro>{$VIRUSTOTALAPIKEY}</macro>
+					<value>YOUR_VT_API_KEY</value>
+				</macro>
+			</macros>
+			<dashboards>
+				<dashboard>
+					<uuid>a1092c835cf84f9a808451fb7b7bdff5</uuid>
+					<name>VirusTotal API Credits</name>
+					<pages>
+						<page>
+							<widgets>
+								<widget>
+									<type>GRAPH_CLASSIC</type>
+									<name>API Credits</name>
+									<width>18</width>
+									<height>6</height>
+									<fields>
+										<field>
+											<type>GRAPH</type>
+											<name>graphid</name>
+											<value>
+												<name>VirusTotal API Credits Used and Quotas</name>
+												<host>Virustotal API Provider</host>
+											</value>
+										</field>
+									</fields>
+								</widget>
+								<widget>
+									<type>GRAPH_CLASSIC</type>
+									<name>Case Creation Credits</name>
+									<y>6</y>
+									<width>12</width>
+									<height>5</height>
+									<fields>
+										<field>
+											<type>GRAPH</type>
+											<name>graphid</name>
+											<value>
+												<name>VirusTotal Case Creation Usage and Quotas</name>
+												<host>Virustotal API Provider</host>
+											</value>
+										</field>
+									</fields>
+								</widget>
+								<widget>
+									<type>GRAPH_CLASSIC</type>
+									<name>Intelligent Queries</name>
+									<y>16</y>
+									<width>24</width>
+									<height>8</height>
+									<fields>
+										<field>
+											<type>GRAPH</type>
+											<name>graphid</name>
+											<value>
+												<name>VirusTotal Intelligent Queries - Used and Quotass</name>
+												<host>Virustotal API Provider</host>
+											</value>
+										</field>
+									</fields>
+								</widget>
+								<widget>
+									<type>GRAPH_CLASSIC</type>
+									<name>Monitor Uploaded Storage Bytes</name>
+									<x>12</x>
+									<y>11</y>
+									<width>12</width>
+									<height>5</height>
+									<fields>
+										<field>
+											<type>GRAPH</type>
+											<name>graphid</name>
+											<value>
+												<name>VirusTotal File Upload/Storage Size Usage and Quotas</name>
+												<host>Virustotal API Provider</host>
+											</value>
+										</field>
+									</fields>
+								</widget>
+								<widget>
+									<type>GRAPH_CLASSIC</type>
+									<name>Monitor Uploaded Storage Count</name>
+									<y>11</y>
+									<width>12</width>
+									<height>5</height>
+									<fields>
+										<field>
+											<type>GRAPH</type>
+											<name>graphid</name>
+											<value>
+												<name>VirusTotal File Upload/Storage Count Useage and Quotas</name>
+												<host>Virustotal API Provider</host>
+											</value>
+										</field>
+									</fields>
+								</widget>
+							</widgets>
+						</page>
+					</pages>
+				</dashboard>
+			</dashboards>
+		</template>
+	</templates>
+	<triggers>
+		<trigger>
+			<uuid>cffd3d1b18b54d4789bd56eae78be725</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - api_requests_daily - Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>b8c02f6b4ff2459099ca8b919208f23a</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_daily.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - api_requests_daily - Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>efe1c60184d947378445207e19bc798c</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - api_requests_hourly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>281cb6e63ce646679a3acb74b9cf821d</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_hourly.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - api_requests_hourly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>ee186311f1eb471eb92f649781b2446c</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - api_requests_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>78e74170faf24a618e5c185c5ecfa22a</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.api_requests_monthly.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - api_requests_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>f438db9b195e454f8f2686d04df32cb5</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - cases_creation_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>faa5a249ce9e411d961e8eba4be13ec6</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.cases_creation_monthly.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - cases_creation_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>debea239b7374b378c61eb12389af5ab</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_downloads_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>6977ccecbec34ff3ae5eb157c76c04ef</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_downloads_monthly.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_downloads_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>de8376d95a054e70a30a9d39d5e5c17e</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_graphs_private- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>a25d27abd16b4b2ba913d20d1d710d0d</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_graphs_private.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_graphs_private- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>1443054ad35c4c33a245f69b5dd4bc0e</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_hunting_rules- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>56d863f0f8cf431abdefabfcab65c6de</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_hunting_rules.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_hunting_rules- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>258b3823e57144b39c45fb6a55490ec4</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_retrohunt_jobs_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>1be00ddd222840ac8caae8684ab812ec</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_retrohunt_jobs_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>0e2231d7a8294f13bf905d4d4861aea7</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_searches_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>1aa5464b157a4e59ab376556f7b00922</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_searches_monthly.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_searches_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>a77f2660d98a4398932045f4293a5408</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_vtdiff_creation_monthly- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>0ffee28750c14201b1bc3243eef6d9cf</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - intelligence_vtdiff_creation_monthly- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>46c61afe48cd44cb851ea7ea95837eb3</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - monitor_storage_bytes- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>625ad41633044a948ce0558a19e42b8b</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_bytes.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - monitor_storage_bytes- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>990321dbb48646108244d019784cb0e7</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - monitor_storage_files- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>9b533b742a614812b9872215c5f068a4</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_storage_files.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - monitor_storage_files- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>6b76833c7923475fadf637c66869adfb</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - monitor_uploaded_bytes- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>95fdfb7d8f774379909219e3894bed50</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_bytes.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - monitor_uploaded_bytes- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>72e5d99e796b4bd6bc1ceca10220cd5a</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)*.75</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)*.75</recovery_expression>
+			<name>Virusttal Quota Change - monitor_uploaded_files- Quota 75% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>WARNING</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+		<trigger>
+			<uuid>31e20bfac04440ebb8f7ef119104517b</uuid>
+			<expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)&gt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)</expression>
+			<recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+			<recovery_expression>last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.used)&lt;last(/Virustotal API Provider/virustotal.api.quotas.monitor_uploaded_files.allowed)</recovery_expression>
+			<name>Virusttal Quota Change - monitor_uploaded_files- Quota 100% Used   {ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</name>
+			<opdata>{ITEM.LASTVALUE1} /  {ITEM.LASTVALUE2}</opdata>
+			<priority>HIGH</priority>
+			<manual_close>YES</manual_close>
+		</trigger>
+	</triggers>
+	<graphs>
+		<graph>
+			<uuid>a1b499ffc45c45ef86272db17f7ddf8b</uuid>
+			<name>VirusTotal API Credits Used and Quotas</name>
+			<graph_items>
+				<graph_item>
+					<sortorder>1</sortorder>
+					<color>1A7C11</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.api_requests_daily.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>2</sortorder>
+					<color>F63100</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.api_requests_daily.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>3</sortorder>
+					<color>2774A4</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.api_requests_hourly.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>4</sortorder>
+					<color>A54F10</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.api_requests_hourly.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>5</sortorder>
+					<color>FC6EA3</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.api_requests_monthly.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>6</sortorder>
+					<color>6C59DC</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.api_requests_monthly.used</key>
+					</item>
+				</graph_item>
+			</graph_items>
+		</graph>
+		<graph>
+			<uuid>c592e1e246624eb6a052157719e9fcc8</uuid>
+			<name>VirusTotal Case Creation Usage and Quotas</name>
+			<graph_items>
+				<graph_item>
+					<sortorder>1</sortorder>
+					<color>1A7C11</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.cases_creation_monthly.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>2</sortorder>
+					<color>F63100</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.cases_creation_monthly.used</key>
+					</item>
+				</graph_item>
+			</graph_items>
+		</graph>
+		<graph>
+			<uuid>f9f94d9b6ae94df68e3b75f0b91ac841</uuid>
+			<name>VirusTotal File Upload/Storage Count Useage and Quotas</name>
+			<graph_items>
+				<graph_item>
+					<sortorder>1</sortorder>
+					<color>1A7C11</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_storage_files.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>2</sortorder>
+					<color>F63100</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_storage_files.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>3</sortorder>
+					<color>2774A4</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_uploaded_files.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>4</sortorder>
+					<color>A54F10</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_uploaded_files.used</key>
+					</item>
+				</graph_item>
+			</graph_items>
+		</graph>
+		<graph>
+			<uuid>7cc602ae639c46fa88e666e412e6142a</uuid>
+			<name>VirusTotal File Upload/Storage Size Usage and Quotas</name>
+			<graph_items>
+				<graph_item>
+					<sortorder>1</sortorder>
+					<color>1A7C11</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_storage_bytes.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>2</sortorder>
+					<color>F63100</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_storage_bytes.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>3</sortorder>
+					<color>2774A4</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_uploaded_bytes.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>4</sortorder>
+					<color>A54F10</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.monitor_uploaded_bytes.used</key>
+					</item>
+				</graph_item>
+			</graph_items>
+		</graph>
+		<graph>
+			<uuid>a9f34c1bcbea41729ad20d8481c0b5bf</uuid>
+			<name>VirusTotal Intelligent Queries - Used and Quotass</name>
+			<graph_items>
+				<graph_item>
+					<sortorder>1</sortorder>
+					<color>1A7C11</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_downloads_monthly.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>2</sortorder>
+					<color>F63100</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_downloads_monthly.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>3</sortorder>
+					<color>2774A4</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_graphs_private.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>4</sortorder>
+					<color>A54F10</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_graphs_private.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>5</sortorder>
+					<color>FC6EA3</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_hunting_rules.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>6</sortorder>
+					<color>6C59DC</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_hunting_rules.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>7</sortorder>
+					<color>AC8C14</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>8</sortorder>
+					<color>611F27</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_retrohunt_jobs_monthly.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>9</sortorder>
+					<color>F230E0</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_searches_monthly.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>10</sortorder>
+					<color>5CCD18</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_searches_monthly.used</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>11</sortorder>
+					<color>BB2A02</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_vtdiff_creation_monthly.allowed</key>
+					</item>
+				</graph_item>
+				<graph_item>
+					<sortorder>12</sortorder>
+					<color>5A2B57</color>
+					<item>
+						<host>Virustotal API Provider</host>
+						<key>virustotal.api.quotas.intelligence_vtdiff_creation_monthly.used</key>
+					</item>
+				</graph_item>
+			</graph_items>
+		</graph>
+	</graphs>
+</zabbix_export>
